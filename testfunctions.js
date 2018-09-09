@@ -43,9 +43,10 @@ function test001(inputstring) {
       } else {
         maxoffset = offsets[offsetsindex] - 1;
       }
-//      possiblelengths["" + minoffset + maxoffset] = {
-      // TODO here check if valid, as dont check current multipleletterskey
-      possiblelengths[possiblelengthskey++] = {
+      possiblelengths["" + minoffset + maxoffset] = {
+        // comment for jed
+        // TODO here check if valid, as dont check current multipleletterskey
+//      possiblelengths[possiblelengthskey++] = {
         min: minoffset,
         max: maxoffset,
         len: maxoffset - minoffset + 1

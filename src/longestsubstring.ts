@@ -1,92 +1,79 @@
-interface SingleLetters {
-  [key: string]: number[];
-}
-interface MultipleLetters {
-  [key: string]: number[];
-}
-interface PossibleLengths {
-  [key: string]: {
-    min: number;
-    max: number;
-    len: number;
-  };
-}
-const getpossiblelengths = (
-  multipleletters: MultipleLetters,
-  lengthofstring: number
+import {
+  MultipleLetters,
+  PossibleLengths,
+  SingleLetters
+} from "./workingstorage";
+
+const getPossibleLengths = (
+  multipleLetters: MultipleLetters,
+  lengthOfString: number
 ) => {
-  const possiblelengths: PossibleLengths = {};
-  let possiblelengthskey = 1;
+  const possibleLengths: PossibleLengths = {};
+  let possibleLengthsKey = 1;
   let offsets = [];
-  let offsetsindex = 0;
-  let minoffset = 0;
-  let maxoffset = 0;
-  for (const multipleletterskey of Object.keys(multipleletters)) {
-    offsets = multipleletters[multipleletterskey];
-    offsetsindex = 0;
-    while (offsetsindex < offsets.length) {
-      if (offsetsindex === 0) {
-        minoffset = 0;
+  let offsetsIndex = 0;
+  let minOffset = 0;
+  let maxOffset = 0;
+  for (const multipleLettersKey of Object.keys(multipleLetters)) {
+    offsets = multipleLetters[multipleLettersKey];
+    offsetsIndex = 0;
+    while (offsetsIndex < offsets.length) {
+      if (offsetsIndex === 0) {
+        minOffset = 0;
       } else {
-        minoffset = offsets[offsetsindex - 1] + 1;
+        minOffset = offsets[offsetsIndex - 1] + 1;
       }
-      offsetsindex++;
-      if (offsetsindex === offsets.length) {
-        maxoffset = lengthofstring;
+      offsetsIndex++;
+      if (offsetsIndex === offsets.length) {
+        maxOffset = lengthOfString;
       } else {
-        maxoffset = offsets[offsetsindex] - 1;
+        maxOffset = offsets[offsetsIndex] - 1;
       }
-      // possiblelengths["" + minoffset + maxoffset] = {
-      // comment for jed
-      // TODO here check if valid, as dont check current multipleletterskey
-      possiblelengths[possiblelengthskey++] = {
-        min: minoffset,
-        max: maxoffset,
-        len: maxoffset - minoffset + 1
+      possibleLengths[possibleLengthsKey++] = {
+        min: minOffset,
+        max: maxOffset,
+        len: maxOffset - minOffset + 1
       };
     }
   }
-  return possiblelengths;
+  return possibleLengths;
 };
 
-const getmultipleletters = (inputString: string) => {
-  const singleletters: SingleLetters = {};
-  const multipleletters: MultipleLetters = {};
+const getMultipleLetters = (inputString: string) => {
+  const singleLetters: SingleLetters = {};
+  const multipleLetters: MultipleLetters = {};
 
   for (let i = 0; i < inputString.length; i++) {
-    if (multipleletters.hasOwnProperty(inputString[i])) {
-      multipleletters[inputString[i]].push(i);
+    if (multipleLetters.hasOwnProperty(inputString[i])) {
+      multipleLetters[inputString[i]].push(i);
     } else {
-      if (singleletters.hasOwnProperty(inputString[i])) {
-        multipleletters[inputString[i]] = singleletters[inputString[i][0]];
-        delete singleletters[inputString[i]];
-        multipleletters[inputString[i]].push(i);
+      if (singleLetters.hasOwnProperty(inputString[i])) {
+        multipleLetters[inputString[i]] = [
+          singleLetters[inputString[i]].offset
+        ];
+        delete singleLetters[inputString[i]];
+        multipleLetters[inputString[i]].push(i);
       } else {
-        singleletters[inputString[i]] = [i];
+        singleLetters[inputString[i]] = { offset: i };
       }
     }
   }
-  return multipleletters;
+  return multipleLetters;
 };
 
 const longestSubstring = (inputString: string) => {
-  console.log(inputString, " : ", typeof inputString);
-  if ((typeof inputString === "string") === false) {
-    inputString += "";
-  }
-  const lengthofstring = inputString.length - 1;
+  const lengthOfString = inputString.length - 1;
+  const multipleLetters = getMultipleLetters(inputString);
 
-  const multipleletters = getmultipleletters(inputString);
-
-  const possiblelengths = getpossiblelengths(
-    multipleletters,
+  const possiblelengths = getPossibleLengths(
+    multipleLetters,
     inputString.length - 1
   );
 
-  console.log(multipleletters);
-  console.log("possiblelengths < \n", possiblelengths, "\n  >");
+  console.log(multipleLetters);
+  console.log("possibleLengths < \n", possiblelengths, "\n  >");
 
-  return lengthofstring;
+  return lengthOfString;
 };
 
 export default longestSubstring;

@@ -6,7 +6,9 @@
   "author": "Tony",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "start": "ts-node src/leetcode",
+    "test": "jest",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/jest": "^23.3.2",

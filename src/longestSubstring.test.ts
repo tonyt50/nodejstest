@@ -27,4 +27,4 @@ testStrings.forEach(({ result, testNum, value }) => {
     expect(longestSubstring(value)).toBe(result));
 });
 
-// test("retested returns 4", () => expect(longestSubstring("retested")).toBe(4));
+test("retested returns 4", () => expect(longestSubstring("retested")).toBe(4));

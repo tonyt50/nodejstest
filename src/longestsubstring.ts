@@ -4,6 +4,14 @@ import {
   SingleLetters
 } from "./workingstorage";
 
+const getFirstOffset = (inputMinOffset: number) => {
+  let firstOffset = 0;
+  if (inputMinOffset > 0) {
+    firstOffset = inputMinOffset;
+  }
+  return firstOffset;
+};
+
 const getPossibleLengths = (
   multipleLetters: MultipleLetters,
   lengthOfString: number
@@ -19,7 +27,7 @@ const getPossibleLengths = (
     offsetsIndex = 0;
     while (offsetsIndex < offsets.length) {
       if (offsetsIndex === 0) {
-        minOffset = 0;
+        getFirstOffset(offsets[offsetsIndex]);
       } else {
         minOffset = offsets[offsetsIndex - 1] + 1;
       }
@@ -58,6 +66,7 @@ const getMultipleLetters = (inputString: string) => {
       }
     }
   }
+  console.log("singleLetters < \n", singleLetters, "\n >");
   return multipleLetters;
 };
 
@@ -65,12 +74,10 @@ const longestSubstring = (inputString: string) => {
   const lengthOfString = inputString.length - 1;
   const multipleLetters = getMultipleLetters(inputString);
 
-  const possiblelengths = getPossibleLengths(
-    multipleLetters,
-    inputString.length - 1
-  );
+  const possiblelengths = getPossibleLengths(multipleLetters, lengthOfString);
 
-  console.log(multipleLetters);
+  console.log("inputString < \n", inputString, "\n >");
+  console.log("multipleLetters < \n", multipleLetters, "\n >");
   console.log("possibleLengths < \n", possiblelengths, "\n  >");
 
   return lengthOfString;

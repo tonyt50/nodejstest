@@ -1,4 +1,4 @@
-import longestSubstring from "./longestsubstring";
+import getLongestSubstringLength from "./longestsubstring";
 
 // console.log(
 //   'longestSubstring("retested") should return 4 does return <',
@@ -6,4 +6,5 @@ import longestSubstring from "./longestsubstring";
 //   ">"
 // );
 
-longestSubstring("cycdxdxyctcxubb");
+getLongestSubstringLength("😀😛😛😀");
+getLongestSubstringLength("abba");

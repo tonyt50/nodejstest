@@ -1,37 +1,49 @@
 import longestSubstring from "./longestsubstring";
-// interface TestString {
-//   testNum: number;
-//   value: string;
-//   result: number;
-// }
+interface TestString {
+  value: string;
+  result: number;
+}
 
-// const testStrings: TestString[] = [
-//   {
-//     testNum: 1,
-//     value: "retested",
-//     result: 4
-//   },
-//   {
-//     testNum: 2,
-//     value: "abba",
-//     result: 2
-//   },
-//   {
-//     testNum: 3,
-//     value: "banana",
-//     result: 3
-//   }
-// ];
+const testStrings: TestString[] = [
+  {
+    value: "retested",
+    result: 4
+  },
+  {
+    value: "abba",
+    result: 2
+  },
+  {
+    value: "banana",
+    result: 3
+  },
+  {
+    value: "cycdxyxyctcxubb",
+    result: 5
+  },
+  {
+    value: "",
+    result: 0
+  },
+  {
+    value: "aaaa",
+    result: 1
+  },
+  {
+    value: "te st",
+    result: 4
+  },
+  {
+    value: "😀😛😛😀",
+    result: 2
+  }
+];
 
-// const runonetest = ({ testNum, value, result }: TestString) => {
-//   test(`${testNum} ${value} returns ${result}`, () =>
-//     expect(longestSubstring(value)).toBe(result));
-// };
+const runonetest = ({ value, result }: TestString, index: number) => {
+  test(`${index} ${value} returns ${result}`, () =>
+    expect(longestSubstring(value)).toBe(result));
+};
 
-// testStrings.forEach(input => {
-//   runonetest(input);
-// });
-
-test("retested returns >= 0", () =>
-  expect(longestSubstring("cycdxdxyctcxubb")).toBeGreaterThanOrEqual(0));
-// expect(longestSubstring("abcdxefxghixjzz")).toBeGreaterThanOrEqual(0));
+testStrings.forEach((input, index) => {
+  runonetest(input, index + 1);
+});

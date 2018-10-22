@@ -1,5 +1,12 @@
 import { Letters } from "./workingstorage";
 
+/**
+ * find longest string without duplicats chasraacters in it
+ * @param str word to
+ * @returns number of longest string
+ * @example
+ *  getLongestSubstringLength("retested") returns 4
+ */
 const getLongestSubstringLength = (str: string) => {
   const chars = [...str];
   const letters: Letters = {};
